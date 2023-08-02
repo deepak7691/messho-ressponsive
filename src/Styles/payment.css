@@ -1,0 +1,61 @@
+
+
+
+   form{
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding-top: 200px;
+      margin: 0 auto;
+      width: 500px;
+      border: 1px solid lightgray;
+      border-radius: 8px;
+      background: white;
+      height: 100vh;
+   }
+
+   .payment{
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+   }
+
+   .inputdata{
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 1px solid lightgray;
+    background: white
+   }
+
+   .buttonSubmit{
+    width: 120px;
+    font-size: 20px;
+    margin: auto;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+   }
+   
+   .batan{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 25px;
+   }
+
+
+   .bg{
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(rgb(253, 233, 242) 0%, rgb(253, 240, 232) 100%, rgb(253, 240, 232) 100%);
+   }
+
+
+   @media (max-width:600px) {
+      form{
+         width: 85vw;
+         padding-top: 230px;
+      }
+      
+   }

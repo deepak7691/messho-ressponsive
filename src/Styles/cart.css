@@ -1,0 +1,205 @@
+.cart-containers{
+    width: 100%;
+    justify-content: center;
+    gap: 25px;
+    display: flex;
+    padding-top: 170px;
+    
+}
+
+.cart-items{
+    width: 500px;
+    height: 170px;
+    display: flex;
+    margin-top: 20px;
+    border: 1px solid rgb(234, 234, 242);
+    padding: 10px;
+}
+
+.photo{
+    width: 60px;
+    height: 60px;
+}
+
+.item-details{
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn{
+    width: fit-content;
+}
+
+.productName{
+    color: rgb(53, 53, 67);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: "Mier demi";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.textc{
+    color: rgb(53, 53, 67);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: "Mier book";
+    white-space: nowrap;
+}
+
+.pricing-section{
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+    border-left: 1px solid rgb(234, 234, 242); ;
+}
+
+.price-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+}
+
+.orderinfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.clicking{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.abc{
+    padding: 10 30;
+    font-size: 12px;
+}
+
+.buttonss{
+    margin-top: 15px;
+    display: flex;
+    width: 300px;
+    height: 42px;
+    padding: 12px;
+    align-items: center;
+    justify-content: center; 
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    font-style: normal;
+    text-align: center;
+    letter-spacing: 0.0015em;
+    font-size: 15px;
+    line-height: 20px;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    background: rgb(159, 32, 137);
+    border: none;
+
+}
+
+.safety{
+    display: flex;
+    margin-top: 20px;
+}
+
+.safetyImage{
+    width: 300px;
+}
+
+.empty{
+    
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyImage{
+    width: 190px;
+    height: 230px;
+}
+
+.yourcartEmpty{
+    color: rgb(53, 53, 67);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: "Mier demi";
+    padding: 20px 0px;
+}
+
+.xtra{
+    color: rgb(97, 97, 115);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    font-family: "Mier book";
+    margin: 0px;
+    padding: 0px 16px 16px;
+}
+
+.start{
+    cursor: pointer;
+    font-style: normal;
+    text-align: center;
+    letter-spacing: 0.0015em;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    background: center center rgb(159, 32, 137);
+    border: none;
+    padding: 8px 12px;
+    width: 160px;
+    height: 40px;
+    
+}
+
+@media (max-width:600px) {
+    .cart-containers{
+        width: 100vw;
+       
+        padding-top: 240px;
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .cart-items{
+        width: 100vw;
+    }
+
+    .productName{
+        font-size:smaller;
+    }
+
+    .pricing-section{
+        width: 100vw;
+    }
+    .buttonss{
+        width: 90vw;
+    }
+    .safety{
+        width: 90vw;
+    }
+    .safetyImage{
+        width: 90vw;
+    }
+
+    .productNames{
+        text-align: center;
+    }
+}
