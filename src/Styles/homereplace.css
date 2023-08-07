@@ -14,7 +14,9 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
+  cursor: pointer;
 }
+
 
 .cards img {
   width: 100%;
@@ -51,3 +53,8 @@
   color: #e0e0e0; /* Star color for empty icons */
 }
 
+.cards:hover{
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+}

@@ -9,8 +9,8 @@
   background-color: white;
 }
 
-header {
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+.header2 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .header {
   width: 100vw;
@@ -31,6 +31,7 @@ header {
 .logo {
   width: 15vw;
   height: 50px;
+  cursor: pointer;
 }
 
 .input-search {
@@ -52,6 +53,7 @@ header {
   align-items: center;
   margin-top: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .cartpart {
@@ -88,6 +90,7 @@ header {
 
 .items li {
   list-style: none;
+  cursor: pointer;
 }
 
 .li {
@@ -96,7 +99,7 @@ header {
   font-weight: 700;
 }
 .li:hover {
-  color: blue;
+  color: rgb(207, 26, 165);
 }
 
 .user {
