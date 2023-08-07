@@ -14,6 +14,11 @@ function Profile() {
     navigate("/register");
   };
 
+  const handleblur = () =>{
+    const profileDetails = document.getElementById("user");
+    profileDetails.classList.remove("user");
+  }
+
   const handleLogout = () => {
     setLogin(false);
     navigate("/login");
@@ -21,7 +26,7 @@ function Profile() {
   return (
     <>
       {login ? (
-        <div className="profiles">
+        <div className="profiles" onBlur={handleblur}>
           <h4 className="prop">{localStorage.getItem("name")}</h4>
           <p className="prop ptag">{localStorage.getItem("phone")}</p>
           <button className="prop btnA" onClick={handleLogout}>
