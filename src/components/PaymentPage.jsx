@@ -1,45 +1,31 @@
 import React, { useContext, useState } from 'react';
 import { Button, Modal, Box, Typography } from '@mui/material';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import '../Styles/payment.css';
 import { useNavigate } from 'react-router-dom';
 import { MyAppContext } from './App';
 import loader from '../Images/loader.gif';
 
+const PaymentSchema = Yup.object().shape({
+  cardNumber: Yup.string().required('Required'),
+  expiryDate: Yup.string().required('Required'),
+  cvv: Yup.string().required('Required'),
+  address: Yup.string().required('Required'),
+});
+
 function PaymentPage() {
   const navigate = useNavigate();
-  const {setCount} = useContext(MyAppContext)
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCVV] = useState('');
-  const [address, setAddress] = useState('');
+  const { setCount } = useContext(MyAppContext);
   const [open, setOpen] = useState(false);
 
-  const handleCardNumberChange = (event) => {
-    setCardNumber(event.target.value);
-  };
-
-  const handleExpiryDateChange = (event) => {
-    setExpiryDate(event.target.value);
-  };
-
-  const handleCVVChange = (event) => {
-    setCVV(event.target.value);
-  };
-
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
+  const handleSubmit = (values, { setSubmitting }) => {
     setOpen(true);
-    setTimeout(()=>{
-      navigate("/")
+    setTimeout(() => {
+      navigate('/');
       setCount(0);
-    },4000)
-    
-  
+      setOpen(false);
+    }, 4000);
   };
 
   const handleClose = () => {
@@ -48,47 +34,65 @@ function PaymentPage() {
 
   return (
     <div className="bg">
-    <form onSubmit={handleSubmit}>
-      <h2 className="payment">Payment Details</h2>
-      <input
-        type="number"
-        id="cardNumber"
-        value={cardNumber}
-        onChange={handleCardNumberChange}
-        placeholder="Enter Card Number"
-        className="inputdata"
-        required
-      />
-      <input
-        type="text"
-        id="expiryDate"
-        value={expiryDate}
-        onChange={handleExpiryDateChange}
-        placeholder="Enter Expiry Date"
-        className="inputdata"
-        required
-      />
-      <input
-        type="number"
-        id="cvv"
-        value={cvv}
-        onChange={handleCVVChange}
-        placeholder="Enter CVV"
-        className="inputdata"
-        required
-      />
-      <input
-        type="text"
-        id="address"
-        value={address}
-        onChange={handleAddressChange}
-        placeholder="Enter Your Address"
-        className="inputdata"
-        required
-      />
-      <Button className="buttonSubmit" variant='contained' type="submit" style={{color:"black",background:"white",margin:"15px auto"}}>
-        Pay Now
-      </Button>
+      <Formik
+        initialValues={{
+          cardNumber: '',
+          expiryDate: '',
+          cvv: '',
+          address: '',
+        }}
+        validationSchema={PaymentSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <h2 className="payment">Payment Details</h2>
+            <Field
+              type="number"
+              name="cardNumber"
+              placeholder="Enter Card Number"
+              className="inputdata"
+            />
+            <ErrorMessage name="cardNumber" component="div" className="error" />
+
+            <Field
+              type="text"
+              name="expiryDate"
+              placeholder="Enter Expiry Date"
+              className="inputdata"
+            />
+            <ErrorMessage name="expiryDate" component="div" className="error" />
+
+            <Field
+              type="number"
+              name="cvv"
+              placeholder="Enter CVV"
+              className="inputdata"
+            />
+            <ErrorMessage name="cvv" component="div" className="error" />
+
+            <Field
+              type="text"
+              name="address"
+              placeholder="Enter Your Address"
+              className="inputdata"
+            />
+            <ErrorMessage name="address" component="div" className="error" />
+
+            <Button
+              className="buttonSubmit"
+              variant="contained"
+              type="submit"
+              style={{ color: 'black', background: 'white', margin: '15px auto' }}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Processing...' : 'Pay Now'}
+            </Button>
+          </Form>
+        )}
+      </Formik>
+
+      {/* Modal */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -100,14 +104,12 @@ function PaymentPage() {
             ThankYou
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Your Order is placed Successfully<br></br>
-            
-            Redirecting you to home page <br></br>
-            <img src={loader} alt='loader' style={{width:"100px",height:"100px",display:'flex',alignItems:"center", justifyContent:"center",margin:"5px auto", padding:"5px 5px"}}/>
+            Your Order is placed Successfully<br />
+            Redirecting you to home page <br />
+            <img src={loader} alt='loader' style={{ width: "100px", height: "100px", display: 'flex', alignItems: "center", justifyContent: "center", margin: "5px auto", padding: "5px 5px" }} />
           </Typography>
         </Box>
       </Modal>
-    </form>
     </div>
   );
 }

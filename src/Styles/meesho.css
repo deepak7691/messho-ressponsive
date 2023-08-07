@@ -56,3 +56,8 @@ CSS for Meesho component
   
 
   
+@media (max-width:600px) {
+  .flexbox{
+    padding-top: 125px;
+  }
+}

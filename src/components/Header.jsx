@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import meeshoLogo from "../Images/meeshoLogo.png";
-import SearchIcon from "@mui/icons-material/Search";
-import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
+
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import "../Styles/header.css";
@@ -62,7 +61,7 @@ function Header() {
             </div>
             <div className="profile">Profile</div>
           </div>
-          <div className="cartpart">
+          <div className="profilepart">
             <div className="cartIcon">
               <AddShoppingCartOutlinedIcon
                 fontSize="medium"

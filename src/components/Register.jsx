@@ -1,49 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Modal, Box, Typography } from '@mui/material';
-
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  phone: Yup.string().required('Phone number is required'),
+  password: Yup.string().required('Password is required'),
+});
 
 function Register() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [open, setOpen] = useState(false);
-
-
-
-  const handleName = (event) => {
-    const value = event.target.value;
-    setName(value);
-    localStorage.setItem('name', value);
-  };
-
-  const handlePassword = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-    localStorage.setItem('password', value);
-  };
-
-  const handlePhone = (event) => {
-    const value = event.target.value;
-    setPhone(value);
-    localStorage.setItem('phone', value);
-  };
-
-  const handleEmail = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-    localStorage.setItem('email', value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (values, { setSubmitting }) => {
+    // Store user data in localStorage
+    localStorage.setItem('name', values.name);
+    localStorage.setItem('email', values.email);
+    localStorage.setItem('phone', values.phone);
+    localStorage.setItem('password', values.password);
 
     setOpen(true);
     setTimeout(() => {
+      setSubmitting(false);
       navigate('/login');
     }, 4000);
   };
@@ -52,64 +32,82 @@ function Register() {
     setOpen(false);
   };
 
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div className="bg">
-    <form onSubmit={handleSubmit}>
-      <h2 className="payment">New User Registration</h2>
-      <input
-        type="text"
-        id="cardNumber"
-        value={name}
-        onChange={handleName}
-        placeholder="Enter Your Name"
-        className="inputdata"
-        required
-      />
-      <input
-        type="email"
-        id="expiryDate"
-        value={email}
-        onChange={handleEmail}
-        placeholder="Enter Your Email"
-        className="inputdata"
-        required
-      />
-      <input
-        type="phone"
-        id="cvv"
-        value={phone}
-        onChange={handlePhone}
-        placeholder="Enter Phone Number"
-        className="inputdata"
-        required
-      />
-      <input
-        type="password"
-        id="address"
-        value={password}
-        onChange={handlePassword}
-        placeholder="Create Password"
-        className="inputdata"
-        required
-      />
-      <div className="batan">
-        <Button
-          className="buttonSubmit"
-          variant="contained"
-          type="submit"
-          style={{ color: 'black', background: 'white' }}
-        >
-          Create Account
-        </Button>
-        <Button
-          onClick={() => navigate('/login')}
-          className="buttonSubmit"
-          variant="contained"
-          style={{ color: 'black', background: 'white' }}
-        >
-          Have an Account?
-        </Button>
-      </div>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          phone: '',
+          password: '',
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <h2 className="payment">New User Registration</h2>
+            <Field
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter Your Name"
+              className="inputdata"
+            />
+            <ErrorMessage name="name" component="div" className="error" />
+
+            <Field
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+              className="inputdata"
+            />
+            <ErrorMessage name="email" component="div" className="error" />
+
+            <Field
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Enter Phone Number"
+              className="inputdata"
+            />
+            <ErrorMessage name="phone" component="div" className="error" />
+
+            <Field
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Create Password"
+              className="inputdata"
+            />
+            <ErrorMessage name="password" component="div" className="error" />
+
+            <div className="batan">
+              <Button
+                className="buttonSubmit"
+                variant="contained"
+                type="submit"
+                style={{ color: 'black', background: 'white' }}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Creating...' : 'Create Account'}
+              </Button>
+              <Button
+                onClick={() => navigate('/login')}
+                className="buttonSubmit"
+                variant="contained"
+                style={{ color: 'black', background: 'white' }}
+              >
+                Have an Account?
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -136,7 +134,6 @@ function Register() {
           </Typography>
         </Box>
       </Modal>
-    </form>
     </div>
   );
 }
